@@ -1,5 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
 .App {
   text-align: center;
+  background-color: rgb(0, 149, 255);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-logo {
@@ -32,7 +44,106 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.wrapper {
+  background-color: #fff;
+  width: 330px;
+  height: 450px;
+  border-radius: 15px;
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-todo {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-todo input {
+  padding: 10px 3px 10px 6px;
+  border-radius: 7px;
+  border: 1px solid #ccc;
+  width: 200px;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.task>span {
+  display: flex;
+  align-items: center;
+}
+
+.btn-add {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(125, 255, 123);
+}
+
+.remove-all-todo {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(248, 114, 114);
+}
+
+.list-todos {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.list-todos>div {
+  border-radius: 5px;
+}
+
+.remove-task {
+  border: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgb(248, 114, 114);
+}
+
+.done {
+  background-color: bisque;
+}
+
+
+
+.navigation {
+  margin-top: 10px;
+}
+
+.navigation button {
+  border: none;
+  background-color: rgba(110, 97, 255, .6);
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+}
+
+.navigation button:active {
+  background-color: rgba(110, 97, 255, .9);
+}
+
+.navigation button+button {
+  margin-left: 5px;
 }
