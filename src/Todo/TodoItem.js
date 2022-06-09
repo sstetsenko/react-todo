@@ -12,7 +12,7 @@ function TodoItem(props) {
         <div className={classes.join()}>
             <div className="task" id={props.id} checked={props.done}>
                 <span>
-                    <input type="checkbox" onClick={() => props.changeCheckbox(props.id)} />
+                    <input type="checkbox" checked={props.done} onClick={() => props.changeCheckbox(props.id)} />
                     &nbsp;
                     <p>{props.todo}</p>
                 </span>
