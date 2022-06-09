@@ -5,7 +5,6 @@ import { TodoControls } from './Todo/TodoControls';
 import { Todos } from './Todo/Todos';
 import { Navigation } from './Todo/Navigation';
 
-
 function App() {
   const [todos, setTodo] = useState([])
   const [filtered, setFiltered] = useState(todos)
