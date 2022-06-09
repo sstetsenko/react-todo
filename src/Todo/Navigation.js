@@ -1,7 +1,6 @@
 import React from "react";
 
-function Navigation(props) {
-
+export const Navigation = (props) => {
     return (
         <div className="navigation">
             <button className="all" onClick={() => props.filterStatus('all')}>All</button>
@@ -11,4 +10,3 @@ function Navigation(props) {
     )
 }
 
-export default Navigation

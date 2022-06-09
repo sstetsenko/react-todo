@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import TodoItem from './Todo/TodoItem';
-import AddTodo from './Todo/AddTodo';
-import Todos from './Todo/Todos';
-import Navigation from './Todo/Navigation';
+import { TodoItem } from './Todo/TodoItem';
+import { TodoControls } from './Todo/TodoControls';
+import { Todos } from './Todo/Todos';
+import { Navigation } from './Todo/Navigation';
 
 
 function App() {
-
   const [todos, setTodo] = useState([])
   const [filtered, setFiltered] = useState(todos)
 
@@ -16,7 +15,6 @@ function App() {
   }, [todos])
 
   const addTask = (title) => {
-
     setTodo([...todos, {
       id: Date.now(),
       todo: title,
@@ -30,9 +28,7 @@ function App() {
     setTodo(todos.filter(() => { }))
   }
 
-  const removeTask = (id) => {
-    setTodo(todos.filter(todo => todo.id !== id))
-  }
+  const removeTask = (id) => setTodo(todos.filter(todo => todo.id !== id))
 
   const changeCheckbox = (id) => {
     setTodo(todos.map(todo => {
@@ -47,8 +43,8 @@ function App() {
     if (status === 'all') {
       setFiltered(todos)
     } else {
-      let newTodo = [...todos].filter(todo => todo.done === status)
-      setFiltered(newTodo)
+      let filteredTodo = [...todos].filter(todo => todo.done === status)
+      setFiltered(filteredTodo)
     }
   }
 
@@ -56,7 +52,7 @@ function App() {
     <div className="App">
       <div className='wrapper'>
 
-        <AddTodo
+        <TodoControls
           todos={todos}
           onCreate={addTask}
           removeAllTasks={removeAllTasks}
@@ -76,13 +72,15 @@ function App() {
           })}
 
         </Todos>
+
         <Navigation
           todos={todos}
           filterStatus={filterStatus}
         />
+
       </div>
     </div>
   );
 }
 
-export default App;
+export default App

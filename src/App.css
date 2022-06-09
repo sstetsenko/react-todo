@@ -89,6 +89,10 @@
   align-items: center;
 }
 
+.task input {
+  margin-right: 10px;
+}
+
 .btn-add {
   width: 35px;
   height: 35px;

@@ -1,6 +1,6 @@
 import React from "react";
 
-function Todos(props) {
+export const Todos = (props) => {
     return (
         <div className="list-todos">
             {props.children}
@@ -8,4 +8,3 @@ function Todos(props) {
     )
 }
 
-export default Todos
