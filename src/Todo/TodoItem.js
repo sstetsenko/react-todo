@@ -26,6 +26,7 @@ export function TodoItem({ todo, done, id, removeTask, changeCheckbox }) {
                     <p onKeyDown={changeContentEditable}
                         onDoubleClick={changeTodoDescription}
                         contentEditable={isEditable}
+                        suppressContentEditableWarning={true}
                     >
                         {todo}
                     </p>
