@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 
-export function TodoItem(props) {
+export function TodoItem({ todo, done, id, removeTask, changeCheckbox }) {
+    const [isEditable, setIsEditable] = useState(false)
+
+    const changeTodoDescription = (e) => {
+        setIsEditable(true)
+        console.log(e);
+    }
+
+    const changeContentEditable = (e) => {
+        if (e.code === 'Enter') {
+            setIsEditable(false)
+        }
+    }
 
     return (
-        <div className={props.done ? 'done' : ''}>
-            <div className="task" id={props.id} checked={props.done}>
+        <div className={done ? 'done' : ''}>
+            <div className="task" checked={done}>
                 <span>
-                    <input type="checkbox" checked={props.done} onClick={() => props.changeCheckbox(props.id)} />
+                    <input type="checkbox"
+                        checked={done}
+                        onChange={() => changeCheckbox(id)}
+                    />
 
-                    <p>{props.todo}</p>
+                    <p onKeyDown={changeContentEditable}
+                        onDoubleClick={changeTodoDescription}
+                        contentEditable={isEditable}
+                    >
+                        {todo}
+                    </p>
                 </span>
-                <button className="remove-task" onClick={() => props.removeTask(props.id)}>&times;</button>
+                <button className="remove-task" onClick={() => removeTask(id)}>&times;</button>
             </div>
         </div>
     )

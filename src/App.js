@@ -24,7 +24,7 @@ function App() {
 
   const removeAllTasks = (e) => {
     e.preventDefault()
-    setTodo(todos.filter(() => { }))
+    setTodo([])
   }
 
   const removeTask = (id) => setTodo(todos.filter(todo => todo.id !== id))
@@ -42,7 +42,7 @@ function App() {
     if (status === 'all') {
       setFiltered(todos)
     } else {
-      let filteredTodo = [...todos].filter(todo => todo.done === status)
+      const filteredTodo = [...todos].filter(todo => todo.done === status)
       setFiltered(filteredTodo)
     }
   }
@@ -64,7 +64,7 @@ function App() {
               id={item.id}
               todo={item.todo}
               done={item.done}
-              key={i}
+              key={item.id}
               removeTask={removeTask}
               changeCheckbox={changeCheckbox}
             />
