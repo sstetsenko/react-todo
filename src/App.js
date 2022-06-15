@@ -59,8 +59,9 @@ function App() {
 
         <Todos>
 
-          {filtered.map((item, i) => {
+          {filtered.map((item) => {
             return <TodoItem
+              arrTodo={todos}
               id={item.id}
               todo={item.todo}
               done={item.done}
