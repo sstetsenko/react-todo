@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export function TodoControls({ onCreate, addTask, removeAllTasks }) {
+export function TodoControls({ onCreate, addTask, removeAllTasks, sub }) {
     const [value, setValue] = useState('')
 
     const submitHandler = (e) => {

@@ -4,10 +4,27 @@ import { TodoItem } from './Todo/TodoItem';
 import { TodoControls } from './Todo/TodoControls';
 import { Todos } from './Todo/Todos';
 import { Navigation } from './Todo/Navigation';
+import DataBase from './DataBase.js';
 
 function App() {
   const [todos, setTodo] = useState([])
   const [filtered, setFiltered] = useState(todos)
+
+
+  const db = new DataBase()
+  console.log(db.create());
+
+
+  useEffect(() => {
+    const getAll = async () => {
+      const response = await fetch("/api/todo")
+      const result = await response.json()
+      return setTodo(result)
+    }
+    getAll()
+  }, [])
+
+  // console.log(todos);
 
   useEffect(() => {
     setFiltered(todos)
@@ -16,8 +33,8 @@ function App() {
   const addTask = (title) => {
     setTodo([...todos, {
       id: Date.now(),
-      todo: title,
-      done: false,
+      title: title,
+      checked: false,
     }]
     )
   }
@@ -27,12 +44,12 @@ function App() {
     setTodo([])
   }
 
-  const removeTask = (id) => setTodo(todos.filter(todo => todo.id !== id))
+  const removeTask = (_id) => setTodo(todos.filter(todo => todo._id !== _id))
 
-  const changeCheckbox = (id) => {
+  const changeCheckbox = (_id) => {
     setTodo(todos.map(todo => {
-      if (todo.id === id) {
-        todo.done = !todo.done
+      if (todo._id === _id) {
+        todo.checked = !todo.checked
       }
       return todo
     }))
@@ -42,7 +59,7 @@ function App() {
     if (status === 'all') {
       setFiltered(todos)
     } else {
-      const filteredTodo = [...todos].filter(todo => todo.done === status)
+      const filteredTodo = [...todos].filter(todo => todo.checked === status)
       setFiltered(filteredTodo)
     }
   }
@@ -52,6 +69,9 @@ function App() {
       <div className='wrapper'>
 
         <TodoControls
+
+
+
           todos={todos}
           onCreate={addTask}
           removeAllTasks={removeAllTasks}
@@ -62,10 +82,10 @@ function App() {
           {filtered.map((item) => {
             return <TodoItem
               arrTodo={todos}
-              id={item.id}
-              todo={item.todo}
-              done={item.done}
-              key={item.id}
+              id={item._id}
+              todo={item.title}
+              done={item.checked}
+              key={item._id}
               removeTask={removeTask}
               changeCheckbox={changeCheckbox}
             />
