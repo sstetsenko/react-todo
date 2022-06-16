@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
-export function TodoItem({ arrTodo, todo, done, id, removeTask, changeCheckbox }) {
+export function TodoItem({ todo, done, id, removeTask, changeCheckbox }) {
     const [isEditable, setIsEditable] = useState(false)
 
     const changeTodoDescription = (e) => {
         setIsEditable(true)
-        console.log(arrTodo);
     }
 
     const changeContentEditable = (e) => {

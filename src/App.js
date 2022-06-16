@@ -12,7 +12,7 @@ function App() {
 
 
   const db = new DataBase()
-  console.log(db.create());
+
 
 
   useEffect(() => {
@@ -24,20 +24,19 @@ function App() {
     getAll()
   }, [])
 
-  // console.log(todos);
-
   useEffect(() => {
     setFiltered(todos)
   }, [todos])
 
   const addTask = (title) => {
     setTodo([...todos, {
-      id: Date.now(),
       title: title,
       checked: false,
     }]
     )
   }
+
+  // console.log(db.create(addTask));
 
   const removeAllTasks = (e) => {
     e.preventDefault()
@@ -69,9 +68,6 @@ function App() {
       <div className='wrapper'>
 
         <TodoControls
-
-
-
           todos={todos}
           onCreate={addTask}
           removeAllTasks={removeAllTasks}
@@ -81,7 +77,6 @@ function App() {
 
           {filtered.map((item) => {
             return <TodoItem
-              arrTodo={todos}
               id={item._id}
               todo={item.title}
               done={item.checked}

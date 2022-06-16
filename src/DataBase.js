@@ -8,15 +8,14 @@ import React from "react"
 
 class DataBase extends React.Component {
 
-    create = async () => {
+    create = async (item) => {
         const response = await fetch("/api/todo", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify(response)
+            body: JSON.stringify(item)
         })
-        // return console.log(response);
     }
 
     getOne() {
