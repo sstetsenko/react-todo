@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { unstable_renderSubtreeIntoContainer } from "react-dom";
+import DataBase from "../DataBase";
 
-export function TodoItem({ todo, done, id, removeTask, changeCheckbox }) {
-    const [isEditable, setIsEditable] = useState(false)
+const db = new DataBase()
+
+export function TodoItem({ todo, done, id, removeTask, changeCheckbox, handleRenameTodo }) {
+    const [isEditable, setIsEditable] = useState(false);
+    const [editedText, setEditedText] = useState("");
 
     const changeTodoDescription = (e) => {
         setIsEditable(true)
@@ -9,8 +14,14 @@ export function TodoItem({ todo, done, id, removeTask, changeCheckbox }) {
 
     const changeContentEditable = (e) => {
         if (e.code === 'Enter') {
+            e.preventDefault()
+            handleRenameTodo(id, editedText)
             setIsEditable(false)
         }
+    }
+
+    const changeText = (e) => {
+        setEditedText(e.target.textContent);
     }
 
     return (
@@ -26,9 +37,19 @@ export function TodoItem({ todo, done, id, removeTask, changeCheckbox }) {
                         onDoubleClick={changeTodoDescription}
                         contentEditable={isEditable}
                         suppressContentEditableWarning={true}
+                        onInput={changeText}
                     >
                         {todo}
                     </p>
+
+
+                    {/* {isText ? (
+                        <p>
+                            texxt
+                        </p>
+                    ) : (
+                        <input value={editedText}/>
+                    )} */}
                 </span>
                 <button className="remove-task" onClick={() => removeTask(id)}>&times;</button>
             </div>

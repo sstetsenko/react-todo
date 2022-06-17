@@ -1,9 +1,3 @@
-// const sub = () => {
-//     return fetch("/api/todo")
-//         .then(response =>  response.json())
-//         .then(result => console.log(result))
-// }
-
 import React from "react"
 
 class DataBase extends React.Component {
@@ -16,22 +10,37 @@ class DataBase extends React.Component {
             },
             body: JSON.stringify(item)
         })
+        const result = await response.json();
+        return result
     }
 
-    getOne() {
-
+    update = async (item) => {
+        const response = await fetch(`/api/todo`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(item)
+        })
+        const result = await response.json();
+        return result
     }
 
-    update() {
-
+    delete = async (id) => {
+        const response = await fetch(`/api/todo/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+        })
+        const result = await response.json()
+        return result
     }
 
-    delete() {
-
-    }
-
-    deleteAll() {
-
+    deleteAll = async () => {
+        await fetch('/api/todo', {
+            method: 'DELETE',
+        })
     }
 }
 
