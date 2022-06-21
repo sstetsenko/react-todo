@@ -7,49 +7,12 @@
 
 .App {
   text-align: center;
-  background-color: rgb(0, 149, 255);
+  background-color: #0095ff;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 
 .wrapper {
   background-color: #fff;
@@ -84,13 +47,38 @@
   border-radius: 5px;
 }
 
-.task>span {
+.task div:first-of-type {
   display: flex;
   align-items: center;
 }
 
+.task p {
+  overflow-x: hidden;
+  max-width: 180px;
+}
+
+.input-task {
+  border: none;
+  color: #003eb9;
+  max-width: 180px;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
 .task input {
   margin-right: 10px;
+}
+
+.pen {
+  position: relative;
+  cursor: pointer;
+}
+
+.pen-img {
+  position: absolute;
+  left: -33px;
 }
 
 .btn-add {
@@ -98,7 +86,7 @@
   height: 35px;
   border-radius: 50%;
   border: none;
-  background-color: rgb(125, 255, 123);
+  background-color: #7dff7b;
 }
 
 .remove-all-todo {
@@ -106,7 +94,7 @@
   height: 35px;
   border-radius: 50%;
   border: none;
-  background-color: rgb(248, 114, 114);
+  background-color: #f87272;
 }
 
 .list-todos {
@@ -114,7 +102,7 @@
   overflow-y: auto;
 }
 
-.list-todos>div {
+.list-todos > div {
   border-radius: 5px;
 }
 
@@ -123,31 +111,33 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: rgb(248, 114, 114);
+  background-color: #f87272;
 }
 
 .done {
-  background-color: bisque;
+  background-color: #d8ffd4;
 }
-
-
 
 .navigation {
   margin-top: 10px;
 }
 
-.navigation button {
+.navigation span {
   border: none;
-  background-color: rgba(110, 97, 255, .6);
+  background-color: rgba(110, 97, 255, 0.6);
   padding: 10px 20px;
   border-radius: 5px;
   color: white;
 }
 
-.navigation button:active {
-  background-color: rgba(110, 97, 255, .9);
+.navigation input {
+  display: none;
 }
 
-.navigation button+button {
+.navigation label + label {
   margin-left: 5px;
+}
+
+.navigation input:checked + span {
+  background-color: #6e61ff;
 }
