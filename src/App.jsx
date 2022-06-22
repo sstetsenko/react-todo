@@ -5,10 +5,12 @@ import { TodoControls } from "./Todo/TodoControls";
 import { Todos } from "./Todo/Todos";
 import { Navigation } from "./Todo/Navigation";
 import DataBase from "./DataBase.js";
+import AppContext from "./context";
 
-function App() {
+const App = () => {
   const [todos, setTodo] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState(todos);
+  const [filterStatus, setFilterStatus] = useState("all");
 
   const db = new DataBase();
 
@@ -22,8 +24,23 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setFilteredTasks(todos);
-  }, [todos]);
+    changeFilteredTask();
+  }, [todos, filterStatus]);
+
+  const changeFilterStatus = (status) => {
+    setFilterStatus(status);
+  };
+
+  const changeFilteredTask = () => {
+    if (filterStatus === "all") {
+      setFilteredTasks(todos);
+    } else {
+      const filteredTodo = [...todos].filter(
+        (todo) => todo.checked === filterStatus
+      );
+      setFilteredTasks(filteredTodo);
+    }
+  };
 
   const addTask = async (title) => {
     const item = {
@@ -44,7 +61,7 @@ function App() {
 
   const removeTask = async (_id) => {
     const result = await db.delete(_id);
-    if (result.deletedCount > 0) {
+    if (result) {
       setTodo(todos.filter((todo) => todo._id !== _id));
     }
   };
@@ -72,15 +89,6 @@ function App() {
     );
   };
 
-  const changeFilterStatus = (status) => {
-    if (status === "all") {
-      setFilteredTasks(todos);
-    } else {
-      const filteredTodo = [...todos].filter((todo) => todo.checked === status);
-      setFilteredTasks(filteredTodo);
-    }
-  };
-
   const handleRenameTodo = async (id, editedText) => {
     const item = todos.find((task) => task._id === id);
 
@@ -102,30 +110,32 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className="wrapper">
-        <TodoControls
-          todos={todos}
-          onCreate={addTask}
-          removeAllTasks={removeAllTasks}
-        />
+    <AppContext>
+      <div className="App">
+        <div className="wrapper">
+          <TodoControls
+            todos={todos}
+            onCreate={addTask}
+            removeAllTasks={removeAllTasks}
+          />
 
-        <Todos>
-          {filteredTasks.map((item) => (
-            <TodoItem
-              handleRenameTodo={handleRenameTodo}
-              item={item}
-              key={item._id}
-              removeTask={removeTask}
-              changeCheckbox={changeCheckbox}
-            />
-          ))}
-        </Todos>
+          <Todos>
+            {filteredTasks.map((item) => (
+              <TodoItem
+                handleRenameTodo={handleRenameTodo}
+                item={item}
+                key={item._id}
+                removeTask={removeTask}
+                changeCheckbox={changeCheckbox}
+              />
+            ))}
+          </Todos>
 
-        <Navigation changeFilterStatus={changeFilterStatus} />
+          <Navigation changeFilterStatus={changeFilterStatus} />
+        </div>
       </div>
-    </div>
+    </AppContext>
   );
-}
+};
 
 export default App;

@@ -1,7 +1,7 @@
 import React from "react";
 
 export const Navigation = ({ changeFilterStatus }) => {
-  (
+  return (
     <div className="navigation">
       <label className="all" onClick={() => changeFilterStatus("all")}>
         <input type="radio" name="progress" />
