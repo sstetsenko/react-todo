@@ -1,14 +1,18 @@
 import React, { useState } from "react";
+import { useContext } from "react";
+import { AppContext } from "../context";
 import { AddIcon } from "../img/AddIcon";
 import { DeleteIcon } from "../img/DeleteIcon";
 
-export const TodoControls = ({ onCreate, removeAllTasks }) => {
+export const TodoControls = ({ removeAllTasks }) => {
   const [value, setValue] = useState("");
+
+  const { create } = useContext(AppContext);
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (value) {
-      onCreate(value);
+      create(value);
       setValue("");
     }
   };
@@ -28,4 +32,4 @@ export const TodoControls = ({ onCreate, removeAllTasks }) => {
       </button>
     </form>
   );
-}
+};
