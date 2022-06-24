@@ -1,4 +1,4 @@
-export const DeleteIcon = ({ width, height }) => {
+export const DeleteIcon = ({ width, height }) => (
   <svg
     className="del-img"
     height={height}
@@ -33,5 +33,5 @@ export const DeleteIcon = ({ width, height }) => {
                 10.7625C9.40902 10.4696 9.40902 9.99474 9.70191 9.70185Z"
       fill="darkred"
     />
-  </svg>;
-};
+  </svg>
+);

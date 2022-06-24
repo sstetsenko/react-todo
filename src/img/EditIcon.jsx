@@ -1,4 +1,4 @@
-export const EditIcon = ({ width, height }) => {
+export const EditIcon = ({ width, height }) => (
   <svg
     className="pen-img"
     height={height}
@@ -22,5 +22,5 @@ export const EditIcon = ({ width, height }) => {
                 17.3916 11.131 16.0504 13.0215 14.16L15.4964 11.685Z"
       fill="black"
     />
-  </svg>;
-};
+  </svg>
+);
