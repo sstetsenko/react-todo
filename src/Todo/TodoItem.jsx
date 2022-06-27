@@ -43,10 +43,12 @@ export function TodoItem({ item, removeTask }) {
             <p onDoubleClick={changeTodoDescription}>{todo}</p>
           )}
         </div>
+
         <div>
           <span className="pen" onClick={clickOnPen}>
             {isEditable && <EditIcon width="25px" height="25px" />}
           </span>
+
           <button className="remove-task" onClick={() => removeTask(id)}>
             <DeleteIcon width="20" heigh="20" />
           </button>

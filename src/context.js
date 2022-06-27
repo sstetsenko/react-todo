@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import { allTodos } from "./constants";
 
 export const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState(todos);
-  const [filterStatus, setFilterStatus] = useState("all");
+  const [filterStatus, setFilterStatus] = useState(allTodos);
 
   const changeFilteredTask = () => {
-    if (filterStatus === "all") {
+    if (filterStatus === allTodos) {
       setFilteredTasks(todos);
     } else {
       const filteredTodo = [...todos].filter(
@@ -33,6 +34,7 @@ export const AppProvider = ({ children }) => {
       title,
       checked: false,
     };
+
     const response = await fetch("/api/todo", {
       method: "POST",
       headers: {
@@ -40,17 +42,21 @@ export const AppProvider = ({ children }) => {
       },
       body: JSON.stringify(item),
     });
+
     const result = await response.json();
+
     setTodos([...todos, result]);
   };
 
   const update = async (id, editedText = null, isText = false) => {
     const item = todos.find((task) => task._id === id);
+
     const updatedItem = {
       ...item,
       title: isText ? editedText : item.title,
       checked: isText ? item.checked : !item.checked,
     };
+
     const response = await fetch(`/api/todo`, {
       method: "PUT",
       headers: {
@@ -58,7 +64,9 @@ export const AppProvider = ({ children }) => {
       },
       body: JSON.stringify(updatedItem),
     });
+
     const result = await response.json();
+
     setTodos(
       todos.map((todo) => {
         let task = { ...todo };
@@ -77,7 +85,9 @@ export const AppProvider = ({ children }) => {
         "Content-Type": "application/json;charset=utf-8",
       },
     });
+
     const result = await response.json();
+
     if (result) {
       setTodos(todos.filter((todo) => todo._id !== id));
     }
@@ -90,7 +100,9 @@ export const AppProvider = ({ children }) => {
         "Content-Type": "application/json;charset=utf-8",
       },
     });
+
     const result = await response.json();
+
     if (result.deletedCount > 0) {
       setTodos([]);
     }

@@ -11,6 +11,7 @@ export const TodoControls = ({ removeAllTasks }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     if (value) {
       create(value);
       setValue("");
@@ -24,9 +25,11 @@ export const TodoControls = ({ removeAllTasks }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
+      
       <button className="btn-add" onClick={submitHandler}>
         <AddIcon width="35" height="35" />
       </button>
+  
       <button className="remove-all-todo" onClick={removeAllTasks}>
         <DeleteIcon width="35" height="35" />
       </button>
