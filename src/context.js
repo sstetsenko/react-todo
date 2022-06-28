@@ -11,6 +11,7 @@ export const AppProvider = ({ children }) => {
   const changeFilteredTask = () => {
     if (filterStatus === allTodos) {
       setFilteredTasks(todos);
+      console.log(todos);
     } else {
       const filteredTodo = [...todos].filter(
         (todo) => todo.checked === filterStatus

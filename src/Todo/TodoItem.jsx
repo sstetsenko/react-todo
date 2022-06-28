@@ -4,19 +4,20 @@ import { DeleteIcon } from "../img/DeleteIcon";
 import { EditIcon } from "../img/EditIcon";
 import { AppContext } from "../context";
 
-export function TodoItem({ item, removeTask }) {
+export function TodoItem({ item }) {
   const { title: todo, checked: done, _id: id } = item;
 
   const [isEditable, setIsEditable] = useState(false);
   const [editedText, setEditedText] = useState(todo);
 
-  const { update } = useContext(AppContext);
+  const { update, deleteTask } = useContext(AppContext);
 
   const changeTodoDescription = () => {
     setIsEditable(true);
   };
 
   const clickOnPen = (e) => {
+    console.log(e);
     if (e.target.className.baseVal === "pen-img") {
       update(id, editedText, true);
       setIsEditable(false);
@@ -49,7 +50,7 @@ export function TodoItem({ item, removeTask }) {
             {isEditable && <EditIcon width="25px" height="25px" />}
           </span>
 
-          <button className="remove-task" onClick={() => removeTask(id)}>
+          <button className="remove-task" onClick={() => deleteTask(id)}>
             <DeleteIcon width="20" heigh="20" />
           </button>
         </div>
