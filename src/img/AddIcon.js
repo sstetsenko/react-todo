@@ -1,4 +1,4 @@
-export const AddIcon = ({ width, height }) => (
+export const AddIcon  = ({ width, height }) => (
     <svg
         className="add-img"
         fill="none"

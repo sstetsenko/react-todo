@@ -1,49 +1,36 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect, FC } from "react";
 import "./App.css";
-import { TodoItem } from "./Todo/TodoItem";
-import { TodoControls } from "./Todo/TodoControls";
-import { Todos } from "./Todo/Todos";
-import { Navigation } from "./Todo/Navigation";
-import { AppContext } from "./context";
-import {ITodo} from "./types/types";
+import { TodoItem, TodoControls, Todos, Navigation } from "./Todo/index";
+import { AppContext } from "./Context";
+import { ITodo } from "./types";
 
-const App = () => {
-  const {
-    todos,
-    getAll,
-    filteredTasks,
-    filterStatus,
-    changeFilteredTask,
-  } = useContext(AppContext);
+export const App: FC<ITodo> = () => {
+  const { todos, getAll, filteredTasks, filterStatus, changeFilteredTask } =
+    useContext(AppContext);
 
   useEffect(() => {
-    if(getAll) getAll();
+    if (getAll) getAll();
   }, []);
 
   useEffect(() => {
-    if(changeFilteredTask) changeFilteredTask();
+    if (changeFilteredTask) changeFilteredTask();
   }, [todos, filterStatus]);
 
   return (
-      <div className="App">
-        <div className="wrapper">
+    <div className="App">
+      <div className="wrapper">
+        <TodoControls />
 
-          <TodoControls />
+        <Todos>
+          {filteredTasks
+            ? filteredTasks.map((item: ITodo) => (
+                <TodoItem item={item} key={item._id} />
+              ))
+            : ""}
+        </Todos>
 
-          <Todos>
-            {
-              filteredTasks ? filteredTasks.map((item: ITodo) => (
-                <TodoItem item = {item} key={item._id}/>
-            ))
-            :
-            ''}
-          </Todos>
-
-          <Navigation />
-
-        </div>
+        <Navigation />
       </div>
+    </div>
   );
 };
-
-export default App;
