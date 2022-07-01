@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext, useEffect } from "react";
+import "./App.css";
+import { TodoItem } from "./Todo/TodoItem";
+import { TodoControls } from "./Todo/TodoControls";
+import { Todos } from "./Todo/Todos";
+import { Navigation } from "./Todo/Navigation";
+import { AppContext } from "./context";
+import {ITodo} from "./types/types";
 
-function App() {
+const App = () => {
+  const {
+    todos,
+    getAll,
+    filteredTasks,
+    filterStatus,
+    changeFilteredTask,
+  } = useContext(AppContext);
+
+  useEffect(() => {
+    if(getAll) getAll();
+  }, []);
+
+  useEffect(() => {
+    if(changeFilteredTask) changeFilteredTask();
+  }, [todos, filterStatus]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <div className="wrapper">
+
+          <TodoControls />
+
+          <Todos>
+            {
+              filteredTasks ? filteredTasks.map((item: ITodo) => (
+                <TodoItem item = {item} key={item._id}/>
+            ))
+            :
+            ''}
+          </Todos>
+
+          <Navigation />
+
+        </div>
+      </div>
   );
-}
+};
 
 export default App;
