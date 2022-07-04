@@ -2,9 +2,9 @@ import { useContext, useEffect, FC } from "react";
 import "./App.css";
 import { TodoItem, TodoControls, Todos, Navigation } from "./Todo/index";
 import { AppContext } from "./Context";
-import { ITodo } from "./types";
+import { TodoType } from "./types";
 
-export const App: FC<ITodo> = () => {
+export const App: FC<TodoType> = () => {
   const { todos, getAll, filteredTasks, filterStatus, changeFilteredTask } =
     useContext(AppContext);
 
@@ -23,7 +23,7 @@ export const App: FC<ITodo> = () => {
 
         <Todos>
           {filteredTasks
-            ? filteredTasks.map((item: ITodo) => (
+            ? filteredTasks.map((item: TodoType) => (
                 <TodoItem item={item} key={item._id} />
               ))
             : ""}

@@ -1,12 +1,12 @@
 import { FC, useState } from "react";
 import { AppContext } from "./Context";
-import { AppProps, ITodo } from "./types";
+import { AppProps, TodoType } from "./types";
 import { ALL_TODOS } from "./constants";
 import axios from "axios";
 
 export const AppProvider: FC<AppProps> = ({ children }) => {
-  const [todos, setTodos] = useState<ITodo[]>([]);
-  const [filteredTasks, setFilteredTasks] = useState<ITodo[]>(todos);
+  const [todos, setTodos] = useState<TodoType[]>([]);
+  const [filteredTasks, setFilteredTasks] = useState<TodoType[]>(todos);
   const [filterStatus, setFilterStatus] = useState<string | boolean>(ALL_TODOS);
 
   const changeFilteredTask = () => {
@@ -25,8 +25,6 @@ export const AppProvider: FC<AppProps> = ({ children }) => {
 
   const getAll = (): Promise<any> =>
     axios.get("/api/todo").then((response) => {
-      console.log(response);
-
       setTodos(response.data);
     });
 
@@ -81,7 +79,6 @@ export const AppProvider: FC<AppProps> = ({ children }) => {
 
   const deleteAll = () => {
     axios.delete("/api/todo").then((response) => {
-      console.log(response.data);
       setTodos([]);
     });
   };

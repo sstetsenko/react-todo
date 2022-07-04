@@ -1,13 +1,15 @@
-export const EditIcon = ({ width, height }) => (
-    <svg
-        className="pen-img"
-        height={height}
-        viewBox="0 0 24 24"
-        width={width}
-        xmlns="http://www.w3.org/2000/svg"
-    >
-        <path
-            d="M13.349 5.34824C14.0522 4.64505 15.0059 4.25 16.0004 4.25C18.0712
+import { IconProps } from "../types";
+
+export const EditIcon = ({ width, height }: IconProps) => (
+  <svg
+    className="pen-img"
+    height={height}
+    viewBox="0 0 24 24"
+    width={width}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M13.349 5.34824C14.0522 4.64505 15.0059 4.25 16.0004 4.25C18.0712
                 4.25 19.75 5.92876 19.75 7.99962C19.75 8.99408 19.3549 9.94781 18.6518
                 10.651L14.0821 15.2206C11.9994 17.3033 9.38981 18.7809 6.53234
                 19.4952L5.64913 19.716C4.82465 19.9222 4.07783 19.1753 4.28395
@@ -20,7 +22,7 @@ export const EditIcon = ({ width, height }) => (
                 10.4619C13.0098 9.93364 12.551 9.24872 12.315 8.50355L9.84003 10.9785C7.94955
                 12.869 6.6084 15.2377 5.95997 17.8315L5.89044 18.1096L6.16854 18.04C8.76226
                 17.3916 11.131 16.0504 13.0215 14.16L15.4964 11.685Z"
-            fill="black"
-        />
-    </svg>
+      fill="black"
+    />
+  </svg>
 );
