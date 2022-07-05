@@ -1,8 +1,55 @@
 import { BaseSyntheticEvent, useState } from "react";
 import { useContext } from "react";
-import { DeleteIcon } from "../img/DeleteIcon";
 import { EditIcon } from "../img/index";
 import { AppContext } from "../Context";
+
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Checkbox from "@mui/material/Checkbox";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+
+const styles = {
+  list: {
+    height: "40px",
+    marginBottom: "10px",
+    padding: 0,
+    display: "flex",
+  },
+  listItem: {
+    display: "flex",
+    width: "100% !important",
+    justifyContent: "space-between",
+    border: "1px solid #ccc",
+    padding: "5px",
+    borderRadius: "5px",
+    "& div:first-of-type": {
+      display: "flex",
+      alignItems: "center",
+    },
+    "& p": {
+      overflowX: "hidden",
+      maxWidth: "180px",
+    },
+  },
+  checkBox: {
+    "& .MuiSvgIcon-root": { fontSize: 20 },
+    width: "20px",
+    height: "20px",
+    marginRight: "10px",
+  },
+  editIcon: { marginRight: "15px" },
+  deleteIcon: {
+    width: "20px",
+    height: "20px",
+  },
+  inputTask: {
+    border: "none",
+    color: "#003eb9",
+    maxWidth: "180px",
+    fontSize: "16px",
+  },
+};
 
 export function TodoItem({ item }: any) {
   const { update, deleteTask } = useContext(AppContext);
@@ -28,16 +75,21 @@ export function TodoItem({ item }: any) {
   };
 
   return (
-    <div className={done ? "done" : ""}>
-      <div className="task">
+    <List className={done ? "done" : ""} sx={styles.list}>
+      <ListItem className="task" sx={styles.listItem}>
         <div>
-          <input type="checkbox" checked={done} onChange={() => update!(id)} />
+          <Checkbox
+            sx={styles.checkBox}
+            checked={done}
+            onChange={() => update!(id)}
+          />
 
           {isEditable ? (
             <input
               className="input-task"
               defaultValue={todo}
               onChange={changeText}
+              style={styles.inputTask}
             />
           ) : (
             <p onDoubleClick={changeTodoDescription}>{todo}</p>
@@ -45,15 +97,26 @@ export function TodoItem({ item }: any) {
         </div>
 
         <div>
-          <span className="pen" onClick={clickOnPen}>
+          <IconButton
+            className="pen"
+            aria-label="edit"
+            size="small"
+            onClick={clickOnPen}
+            sx={styles.editIcon}
+          >
             {isEditable && <EditIcon width="25px" height="25px" />}
-          </span>
+          </IconButton>
 
-          <button className="remove-task" onClick={() => deleteTask!(id)}>
-            <DeleteIcon width="20" height="20" />
-          </button>
+          <IconButton
+            aria-label="delete"
+            size="small"
+            onClick={() => deleteTask!(id)}
+            sx={styles.deleteIcon}
+          >
+            <DeleteIcon fontSize="inherit" />
+          </IconButton>
         </div>
-      </div>
-    </div>
+      </ListItem>
+    </List>
   );
 }

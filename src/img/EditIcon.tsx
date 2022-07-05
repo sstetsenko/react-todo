@@ -6,8 +6,10 @@ export const EditIcon = ({ width, height }: IconProps) => (
     height={height}
     viewBox="0 0 24 24"
     width={width}
+    style={{position: 'absolute'}}
     xmlns="http://www.w3.org/2000/svg"
   >
+
     <path
       d="M13.349 5.34824C14.0522 4.64505 15.0059 4.25 16.0004 4.25C18.0712
                 4.25 19.75 5.92876 19.75 7.99962C19.75 8.99408 19.3549 9.94781 18.6518
