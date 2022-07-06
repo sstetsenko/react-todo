@@ -4,17 +4,17 @@ import { TodoItem, TodoControls, Navigation } from "./Todo/index";
 import { AppContext } from "./Context";
 import { TodoType } from "./types";
 
-import Card from "@mui/material/Container";
-import { Container } from "@mui/system";
+import { Container, Card, Box } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
-const styles = {
+const useStyles = makeStyles({
   app: {
     margin: 0,
     padding: 0,
-    'box-sizing': "border-box",
+    "box-sizing": "border-box",
     outline: "none",
-    'font-family': "Roboto, sans-serif",
-    'text-align': "center",
+    "font-family": "Roboto, sans-serif",
+    "text-align": "center",
     backgroundColor: "#0095ff",
     height: "100vh",
     display: "flex",
@@ -24,27 +24,26 @@ const styles = {
 
   container: {
     backgroundColor: "white",
-    width: 330,
-    height: 450,
+    maxWidth: "330px",
+    height: "450px",
     borderRadius: 5,
-    paddingTop: 4,
-    paddingBottom: 3,
-    paddingLeft: 3,
-    paddingRight: 3,
+    padding: "25px 20px !important",
     display: "flex",
     flexDirection: "column",
   },
 
   card: {
     height: 280,
-    marginBottom: 2,
-    overflowY: "auto",
+    marginBottom: "10px",
+    overflow: "auto !important",
     paddingLeft: "0px !important",
     paddingRight: "0px !important",
+    boxShadow: "none !important",
   },
-};
-
+});
 export const App: FC<TodoType> = () => {
+  const classes = useStyles();
+
   const { todos, getAll, filteredTasks, filterStatus, changeFilteredTask } =
     useContext(AppContext);
 
@@ -57,11 +56,11 @@ export const App: FC<TodoType> = () => {
   }, [todos, filterStatus]);
 
   return (
-    <div className="App" style={styles.app}>
-      <Container sx={styles.container}>
+    <Box className={classes.app}>
+      <Container className={classes.container}>
         <TodoControls />
 
-        <Card sx={styles.card}>
+        <Card className={classes.card}>
           {filteredTasks
             ? filteredTasks.map((item: TodoType) => (
                 <TodoItem item={item} key={item._id} />
@@ -71,6 +70,6 @@ export const App: FC<TodoType> = () => {
 
         <Navigation />
       </Container>
-    </div>
+    </Box>
   );
 };

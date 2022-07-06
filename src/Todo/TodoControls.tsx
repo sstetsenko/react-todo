@@ -44,7 +44,7 @@ export const TodoControls = () => {
       sx={styles.box}
       noValidate
       autoComplete="off"
-      onChange={(e: { target: any }) => {
+      onChange={(e: BaseSyntheticEvent) => {
         setValue(e.target.value);
       }}
     >

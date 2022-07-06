@@ -4,41 +4,36 @@ import { AppContext } from "../Context";
 
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { makeStyles } from "@mui/styles";
 
-const styles = {
+const useStyles = makeStyles({
   buttonGroup: {
     width: "100%",
     justifyContent: "center",
   },
   toggleButton: {
     padding: "7px !important",
-  }
-};
+  },
+})
 
-export const Navigation: FC  = () => {
-  const { changeFilterStatus } = useContext(AppContext);
+export const Navigation: FC = () => {
+  const { changeFilterStatus, filterStatus, changeFilteredTask } =
+    useContext(AppContext);
 
-  const [alignment, setAlignment] = useState("All");
-
-  const handleChange = (
-    event: React.MouseEvent<HTMLElement>,
-    newAlignment: string
-  ) => {
-    setAlignment(newAlignment);
-  };
+  const classes = useStyles()
 
   return (
     <ToggleButtonGroup
-      value={alignment}
+      value={filterStatus}
       exclusive
-      onChange={handleChange}
-      sx={styles.buttonGroup}
+      onChange={changeFilteredTask}
+      className={classes.buttonGroup}
     >
       <ToggleButton
         color="primary"
         value="All"
         onClick={() => changeFilterStatus!(ALL_TODOS)}
-        sx={styles.toggleButton}
+        className={classes.toggleButton}
       >
         All
       </ToggleButton>
@@ -47,7 +42,7 @@ export const Navigation: FC  = () => {
         color="warning"
         value="In Progress"
         onClick={() => changeFilterStatus!(false)}
-        sx={styles.toggleButton}
+        className={classes.toggleButton}
       >
         In Progress
       </ToggleButton>
@@ -56,7 +51,7 @@ export const Navigation: FC  = () => {
         color="success"
         value="Done"
         onClick={() => changeFilterStatus!(true)}
-        sx={styles.toggleButton}
+        className={classes.toggleButton}
       >
         Done
       </ToggleButton>

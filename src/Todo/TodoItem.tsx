@@ -8,28 +8,29 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import { makeStyles } from "@mui/styles";
 
-const styles = {
+const useStyles = makeStyles({
   list: {
     height: "40px",
-    marginBottom: "10px",
-    padding: 0,
+    marginBottom: "10px !important",
+    padding: "0 !important",
     display: "flex",
   },
   listItem: {
-    display: "flex",
+    display: "flex !important",
     width: "100% !important",
-    justifyContent: "space-between",
+    justifyContent: "space-between !important",
     border: "1px solid #ccc",
     padding: "5px",
     borderRadius: "5px",
     "& div:first-of-type": {
-      display: "flex",
-      alignItems: "center",
+      display: "flex !important",
+      alignItems: "center !important",
     },
     "& p": {
-      overflowX: "hidden",
-      maxWidth: "180px",
+      overflowX: "hidden !important",
+      maxWidth: "180px !important",
     },
   },
   checkBox: {
@@ -49,7 +50,7 @@ const styles = {
     maxWidth: "180px",
     fontSize: "16px",
   },
-};
+});
 
 export function TodoItem({ item }: any) {
   const { update, deleteTask } = useContext(AppContext);
@@ -58,6 +59,8 @@ export function TodoItem({ item }: any) {
 
   const [isEditable, setIsEditable] = useState(false);
   const [editedText, setEditedText] = useState(todo);
+
+  const classes = useStyles();
 
   const changeTodoDescription = () => {
     setIsEditable(true);
@@ -75,21 +78,20 @@ export function TodoItem({ item }: any) {
   };
 
   return (
-    <List className={done ? "done" : ""} sx={styles.list}>
-      <ListItem className="task" sx={styles.listItem}>
+    <List className={done ? `done ${classes.list}` : `"" ${classes.list}`}>
+      <ListItem className={classes.listItem}>
         <div>
           <Checkbox
-            sx={styles.checkBox}
+            className={classes.checkBox}
             checked={done}
             onChange={() => update!(id)}
           />
 
           {isEditable ? (
             <input
-              className="input-task"
+              className={classes.inputTask}
               defaultValue={todo}
               onChange={changeText}
-              style={styles.inputTask}
             />
           ) : (
             <p onDoubleClick={changeTodoDescription}>{todo}</p>
@@ -98,20 +100,18 @@ export function TodoItem({ item }: any) {
 
         <div>
           <IconButton
-            className="pen"
+            className={classes.editIcon}
             aria-label="edit"
             size="small"
             onClick={clickOnPen}
-            sx={styles.editIcon}
           >
             {isEditable && <EditIcon width="25px" height="25px" />}
           </IconButton>
 
           <IconButton
-            aria-label="delete"
+            aria-label={classes.deleteIcon}
             size="small"
             onClick={() => deleteTask!(id)}
-            sx={styles.deleteIcon}
           >
             <DeleteIcon fontSize="inherit" />
           </IconButton>
